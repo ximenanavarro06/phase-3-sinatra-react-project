@@ -3,7 +3,8 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/blogs" do
-    { message: "Good luck with your project!" }.to_json
+    blogs = Blog.all
+    blogs.to_json
   end
 
   post "/blog/new_post" do
@@ -14,8 +15,12 @@ class ApplicationController < Sinatra::Base
     
   end
 
-  delete "/blog/delete_blog" do
+  delete "/blogs/:id" do
+    blog = Blog.find(params[:id])
+    puts "hello"
     
+    blog.destroy
+    blog.to_json
   end
 
 
@@ -49,7 +54,7 @@ class ApplicationController < Sinatra::Base
 
 
   get "/user" do
-    
+
   end
 
 

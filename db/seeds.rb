@@ -1,6 +1,6 @@
-# Comment.destroy_all
-# Blog.destroy_all
-# Likes.destroy_all
+Comment.destroy_all
+Blog.destroy_all
+Like.destroy_all
 
 
 puts "Loading users..."
