@@ -25,11 +25,22 @@ class ApplicationController < Sinatra::Base
 
 
 
-  get "/comments" do
-    
+  # get "/comments" do
+  #   Comments = Comment.all
+  #   Comments.to_json
+  # end
+
+  get "/comments/:id" do
+    Comments = Comment.where(blog_id: params[:id])
+    Comments.to_json
   end
 
-  post "/comments/new_comment" do
+  post "/comments" do
+    newComments = Comment.create(
+      content: params[:content],
+      blog_id: params[:blog_id],
+      user_id: params[:user_id]
+    )
 
   end
 
