@@ -11,7 +11,13 @@ class ApplicationController < Sinatra::Base
     
   end
 
-  patch "/blog/add_like" do
+  patch "/blogs/:id" do
+    blog = Blog.find(params[:id])
+    blog.update(
+
+      like_count: params[:like_count]
+    )
+    blog.to_json
     
   end
 
@@ -30,6 +36,8 @@ class ApplicationController < Sinatra::Base
   #   Comments.to_json
   # end
 
+  
+
   get "/comments/:id" do
     Comments = Comment.where(blog_id: params[:id])
     Comments.to_json
@@ -39,8 +47,17 @@ class ApplicationController < Sinatra::Base
     newComments = Comment.create(
       content: params[:content],
       blog_id: params[:blog_id],
-      user_id: params[:user_id]
+      
+      
     )
+    
+  end
+
+
+  patch "/comments/:id" do 
+    editComment = Comment.find(params[:id])
+      editComment.update
+      editComment.to_json
 
   end
 
@@ -50,9 +67,12 @@ class ApplicationController < Sinatra::Base
 
 
 
-  get "/likes" do
-    
-  end
+  # get "/likes/:id" do
+  #   newLikes = Like.create(
+  #     blog_id: params[:blog_id],
+  #     user_id: params[:user_id],
+  #   )
+  # end
 
   patch "/likes/new_like" do
 
@@ -61,13 +81,6 @@ class ApplicationController < Sinatra::Base
   delete "/likes/delete_like" do
 
   end
-
-
-
-  get "/user" do
-
-  end
-
 
 
 end
